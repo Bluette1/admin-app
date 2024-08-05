@@ -161,7 +161,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-adorable-avatar-env/
+admin-env/
 
 # VS Code
 .vscode/
