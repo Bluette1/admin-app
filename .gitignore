@@ -162,6 +162,7 @@ ENV/
 env.bak/
 venv.bak/
 admin-env/
+admin-app-env/
 
 # VS Code
 .vscode/
