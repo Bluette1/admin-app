@@ -1,11 +1,12 @@
-version: '3.8'
 services:
-  backend:
+  admin_backend:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 8000:8000
+    networks:
+      - default
     volumes:
       - .:/app
 
@@ -16,11 +17,17 @@ services:
     image: mysql:8.0.39
     restart: always
     environment:
+      MYSQL_PORT: 3306
       MYSQL_DATABASE: admin
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      # MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - .dbdata:/var/lib/mysql
     ports:
       - 33066:3306
+    networks:
+      - default
+
+networks:
+  admin_default:
+    driver: bridge

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.MiddleWare.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'admin.urls'
@@ -80,11 +81,17 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'admin',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        # 'NAME': 'admin',
+        # 'USER': 'root',
+        # 'PASSWORD': 'root',
         'HOST': 'db',
-        'PORT': '3306'
+        # 'PORT': '3306'
+
+        'NAME': os.getenv('MYSQL_DATABASE', 'admin'),
+        # 'USER': os.getenv('MYSQL_USER', 'root'),
+        'PASSWORD': os.getenv('MYSQL_ROOT_PASSWORD', 'root'),
+        # 'HOST': os.getenv('MYSQL_DATABASE_HOST', 'db'),
+        'PORT': os.getenv('MYSQL_PORT', '3306'),
     }
 }
 
