@@ -1,0 +1,14 @@
+####
+GET http://0.0.0.0:8000/
+
+###
+GET http://0.0.0.0:8000/api/products
+
+###
+POST http://0.0.0.0:8000/api/products 
+Content-Type: application/json
+
+{"title": "title", "image": "image"}
+
+###
+GET http://0.0.0.0:8000/api/products/1
