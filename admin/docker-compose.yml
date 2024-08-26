@@ -3,31 +3,41 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: 'python manage.py runserver 0.0.0.0:8000'
     ports:
       - 8000:8000
     networks:
-      - default
+      - shared_network
     volumes:
       - .:/app
-
     depends_on:
       - db
-
+  
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python consumer.py'
+    networks:
+      - shared_network
+    depends_on:
+      - db
+      
   db:
     image: mysql:8.0.39
     restart: always
     environment:
       MYSQL_PORT: 3306
       MYSQL_DATABASE: admin
-      # MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - .dbdata:/var/lib/mysql
     ports:
       - 33066:3306
     networks:
-      - default
+      - shared_network
 
 networks:
-  admin_default:
+  shared_network:
+    external: true
     driver: bridge
