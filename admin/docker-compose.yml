@@ -18,6 +18,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: 'python consumer.py'
+    environment:
+      - DJANGO_SETTINGS_MODULE=admin.settings
     networks:
       - shared_network
     depends_on:
